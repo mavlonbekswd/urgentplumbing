@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Urgent Plumbing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .thank-you-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #F8F9FA 0%, #E8F4F8 100%);
+        }
+        .thank-you-card {
+            max-width: 600px;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: #10B981;
+        }
+        .thank-you-card h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        .thank-you-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="thank-you-card">
+            <div class="success-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.667 20L21.667 25L33.333 13.333" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M36.667 20C36.667 29.205 29.205 36.667 20 36.667C10.795 36.667 3.333 29.205 3.333 20C3.333 10.795 10.795 3.333 20 3.333C29.205 3.333 36.667 10.795 36.667 20Z" stroke="currentColor" stroke-width="3"/>
+                </svg>
+            </div>
+            <h1>Thank You!</h1>
+            <p>We've received your message and will get back to you as soon as possible. Our team typically responds within 1-2 hours during business hours.</p>
+            <a href="index.html" class="btn btn-primary">Return to Home</a>
+        </div>
+    </div>
+</body>
+</html>
+
+
