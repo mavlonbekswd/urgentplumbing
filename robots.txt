@@ -1,0 +1,24 @@
+# robots.txt for Urgent Plumbing Website
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Disallow crawling of non-content files
+Disallow: /images/
+Disallow: /*.md$
+Disallow: /thank-you.html
+
+# Sitemap location
+Sitemap: https://urgentplumbing.uk/sitemap.xml
+
+# Crawl-delay (optional - allows time between requests)
+# Crawl-delay: 1
+
+# Specific bot instructions (optional)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
