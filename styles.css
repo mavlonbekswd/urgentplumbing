@@ -521,6 +521,22 @@ height: 82px;
     border-radius: 20px;
 }
 
+.service-area-list {
+  margin-top: 8px;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 20px;
+}
+
+.service-area-list li {
+  font-size: 0.95rem;
+  color: #333;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 4px;
+}
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -631,16 +647,16 @@ height: 82px;
     .menu-toggle {
         display: flex;
     }
-    
+
     .logo img {
     width: 60px;
     height: 60px;
     }
-    
+
     .logo-text {
         font-size: 1rem;
     }
-    
+
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -654,28 +670,28 @@ height: 82px;
         transition: var(--transition);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
-    
+
     .nav-menu.active {
         left: 0;
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1.1rem;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .about-content,
     .contact-wrapper {
         grid-template-columns: 1fr;
     }
-    
+
     .services-grid {
         grid-template-columns: 1fr;
     }
@@ -686,7 +702,7 @@ height: 82px;
     width: 40px;
         height: 40px;
     }
-    
+
    .logo-text {
   display: flex;
   flex-direction: column;
@@ -716,29 +732,41 @@ height: 82px;
     align-items: center;
     gap: 6px;
   }
-    
+
     .nav-wrapper {
         padding: 0.75rem 0;
     }
-    
+
     .hero {
         min-height: 80vh;
     }
-    
+
     .hero-title {
         font-size: 2rem;
     }
-    
+
     section {
         padding: 50px 0;
     }
-    
+
     .hero-buttons {
         flex-direction: column;
     }
-    
+
     .btn {
         width: 100%;
     }
+
+    .service-area-list {
+    grid-template-columns: 1fr 1fr; /* ikki ustun */
+    gap: 2px 10px;
+    text-align: left;
+  }
+
+  .service-area-list li {
+    font-size: 0.85rem;
+    border-bottom: none;
+    color: #444;
+  }
 }
 
