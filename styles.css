@@ -75,7 +75,7 @@ section {
 .logo img {
     flex-shrink: 0;
     width: 82px;
-height: 82px;
+    height: 82px;
     object-fit: contain;
     display: block;
 }
@@ -85,27 +85,28 @@ height: 82px;
 }
 
 .logo-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.1;
 }
 
 .logo-line1 {
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #0073e6; /* vivid blue */
-  font-size: 1.4rem;
-  letter-spacing: 9.5px;
-  margin-bottom: 2px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #0073e6;
+    /* vivid blue */
+    font-size: 1.4rem;
+    letter-spacing: 9.5px;
+    margin-bottom: 2px;
 }
 
 .logo-line2 {
-  text-transform: lowercase;
-  font-weight: 500;
-  color: #333;
-  font-size: 0.9rem;
-  letter-spacing: 0.3px;
+    text-transform: lowercase;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
 }
 
 .nav-menu {
@@ -245,6 +246,7 @@ height: 82px;
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -317,50 +319,156 @@ height: 82px;
 
 /* Services Section */
 .services {
-    background: var(--white);
+    background: var(--bg-light);
+    /* Changed to slightly off-white for better card contrast if card is white */
+    overflow: hidden;
+    /* Prevent horizontal scrollbar on body if cards overflow slightly during animation */
 }
 
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+/* Horizontal Scroll Container */
+.services-scroll-container {
+    display: flex;
+    overflow-x: auto;
     gap: 2rem;
+    padding: 2rem 1rem 4rem 1rem;
+    /* Extra bottom padding for hover shadows */
+    margin: 0 -1rem;
+    /* Negative margin to align with container padding */
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
+    -webkit-overflow-scrolling: touch;
 }
 
+.services-scroll-container::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+/* Premium Card Design */
 .service-card {
-    background: var(--white);
-    padding: 2.5rem;
+    background: #000;
+    /* Fallback for dark theme */
+    min-width: 340px;
+    max-width: 340px;
+    /* Fixed width for consistent cards */
+    padding: 0;
     border-radius: 20px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
-    transition: var(--transition);
-    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.12);
+/* Hover State */
+@media (min-width: 969px) {
+    .service-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
 }
 
+/* Background Image - Always Visible */
+.card-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    /* Always visible now */
+    transition: transform 0.6s ease;
+    z-index: 0;
+    transform: scale(1);
+}
+
+.service-card:hover .card-bg-image {
+    transform: scale(1.1);
+    /* Zoom effect on hover */
+}
+
+/* Dark Overlay for Readability */
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.7) 60%,
+            rgba(0, 0, 0, 0.9) 100%);
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+/* On hover, maybe slightly lighten overlay to show more image, or keep same? User said "Overlay opacity slightly reduces" */
+.service-card:hover .card-overlay {
+    opacity: 0.85;
+}
+
+/* Content Wrapper */
+.card-content {
+    position: relative;
+    z-index: 2;
+    padding: 2.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 3rem;
+}
+
+/* Icon Styling */
 .service-icon {
     width: 64px;
     height: 64px;
-    background: linear-gradient(135deg, rgba(0, 170, 255, 0.1) 0%, rgba(0, 102, 204, 0.1) 100%);
-    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    /* Glassmorphism */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    margin-bottom: 2rem;
+    color: #4FD1C5;
+    /* Light Teal/Aqua for icons */
+    transition: all 0.4s ease;
 }
 
+.service-card:hover .service-icon {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Typography elements always white due to dark overlay */
 .service-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: var(--text-dark);
+    color: var(--white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .service-card p {
-    color: var(--text-light);
-    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    font-weight: 400;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Features Section */
@@ -441,22 +549,22 @@ height: 82px;
 }
 
 .about-image .image-box {
-  background: linear-gradient(135deg, #eaf4ff 0%, #f5f9ff 100%);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  height: 100%;
+    background: linear-gradient(135deg, #eaf4ff 0%, #f5f9ff 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    height: 100%;
 }
 
 .about-image img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 12px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 /* Contact Section */
@@ -524,19 +632,19 @@ height: 82px;
 }
 
 .service-area-list {
-  margin-top: 8px;
-  padding-left: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px 20px;
+    margin-top: 8px;
+    padding-left: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 20px;
 }
 
 .service-area-list li {
-  font-size: 0.95rem;
-  color: #333;
-  border-bottom: 1px solid #eaeaea;
-  padding-bottom: 4px;
+    font-size: 0.95rem;
+    color: #333;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 4px;
 }
 
 .form-group {
@@ -651,8 +759,8 @@ height: 82px;
     }
 
     .logo img {
-    width: 60px;
-    height: 60px;
+        width: 60px;
+        height: 60px;
     }
 
     .logo-text {
@@ -694,46 +802,65 @@ height: 82px;
         grid-template-columns: 1fr;
     }
 
-    .services-grid {
-        grid-template-columns: 1fr;
+    /* Mobile Services Update */
+    .services-scroll-container {
+        flex-direction: column;
+        overflow-x: hidden;
+        /* Disable horizontal scroll */
+        gap: 1.5rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .service-card {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    /* Keep hover effect logic but maybe tone down lift on touch? 
+       Actually, active state on touch might trigger hover, so keeping styles is fine.
+       Maybe slightly less lift to avoid jitter. */
+    .service-card:hover {
+        transform: translateY(-5px);
     }
 }
 
 @media (max-width: 640px) {
     .logo img {
-    width: 40px;
+        width: 40px;
         height: 40px;
     }
 
-   .logo-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  line-height: 1.1;
-}
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: 1.1;
+    }
 
-.logo-line1 {
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #0073e6; /* vivid blue */
-  font-size: 1rem;
-  letter-spacing: 6.5px;
-  margin-bottom: 2px;
-}
+    .logo-line1 {
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #0073e6;
+        /* vivid blue */
+        font-size: 1rem;
+        letter-spacing: 6.5px;
+        margin-bottom: 2px;
+    }
 
-.logo-line2 {
-  text-transform: lowercase;
-  font-weight: 500;
-  color: #333;
-  font-size: 0.6rem;
-  letter-spacing: 0.3px;
-}
+    .logo-line2 {
+        text-transform: lowercase;
+        font-weight: 500;
+        color: #333;
+        font-size: 0.6rem;
+        letter-spacing: 0.3px;
+    }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
 
     .nav-wrapper {
         padding: 0.75rem 0;
@@ -760,15 +887,15 @@ height: 82px;
     }
 
     .service-area-list {
-    grid-template-columns: 1fr 1fr; /* ikki ustun */
-    gap: 2px 10px;
-    text-align: left;
-  }
+        grid-template-columns: 1fr 1fr;
+        /* ikki ustun */
+        gap: 2px 10px;
+        text-align: left;
+    }
 
-  .service-area-list li {
-    font-size: 0.85rem;
-    border-bottom: none;
-    color: #444;
-  }
+    .service-area-list li {
+        font-size: 0.85rem;
+        border-bottom: none;
+        color: #444;
+    }
 }
-
