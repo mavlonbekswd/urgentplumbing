@@ -8,8 +8,8 @@ import { PageHero } from "@/components/sections/PageHero";
 import { PointsGrid } from "@/components/sections/PointsGrid";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { hasImage, ImageSlot } from "@/components/ui/ImageSlot";
-import type { ImageSlotId } from "@/data/images";
+import { WorkPhoto } from "@/components/ui/WorkPhoto";
+import { aboutHeroPhoto, aboutWorkPhotos } from "@/data/photos";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
@@ -38,8 +38,6 @@ const customers = [
   },
 ];
 
-const workPhotos = (["about-van", "recent-work-1", "recent-work-2", "recent-work-3"] as ImageSlotId[]).filter(hasImage);
-
 export default function AboutPage() {
   return (
     <>
@@ -56,9 +54,13 @@ export default function AboutPage() {
           </>
         }
         aside={
-          hasImage("about-team") ? (
-            <ImageSlot id="about-team" className="hidden lg:block" sizes="(min-width: 1024px) 480px, 100vw" />
-          ) : undefined
+          <WorkPhoto
+            id={aboutHeroPhoto}
+            priority
+            frameClassName="aspect-[4/3] lg:aspect-[4/5]"
+            className="md:max-w-xl lg:mx-auto lg:max-w-sm"
+            sizes="(min-width: 1024px) 384px, 100vw"
+          />
         }
       />
 
@@ -155,20 +157,28 @@ export default function AboutPage() {
         </Section>
       )}
 
-      {/* Recent work — only shown once real photos are added in data/images.ts */}
-      {workPhotos.length > 0 && (
-        <Section labelledBy="work-heading">
-          <SectionHeading id="work-heading" label="Recent work" title="A few recent jobs." />
-          <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {workPhotos.map((id) => (
-              <ImageSlot key={id} id={id} sizes="(min-width: 1024px) 280px, 50vw" />
-            ))}
-          </div>
-        </Section>
-      )}
+      {/* Recent work */}
+      <Section tone={team.length > 0 ? "white" : "mist"} labelledBy="work-heading">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <SectionHeading
+            id="work-heading"
+            label="Recent work"
+            title="A few recent jobs."
+            intro={<p>Our own photos from jobs we&apos;ve worked on.</p>}
+          />
+          <ButtonLink href="/our-work" variant="secondary" icon="arrowRight" iconPosition="end" className="shrink-0">
+            See more of our work
+          </ButtonLink>
+        </div>
+        <div className="mt-10 grid gap-4 sm:grid-cols-3 lg:gap-5">
+          {aboutWorkPhotos.map((id) => (
+            <WorkPhoto key={id} id={id} sizes="(min-width: 1280px) 370px, (min-width: 640px) 31vw, 100vw" />
+          ))}
+        </div>
+      </Section>
 
       {/* Where we work */}
-      <Section tone={team.length > 0 ? "white" : "mist"} labelledBy="where-heading">
+      <Section tone={team.length > 0 ? "mist" : "white"} labelledBy="where-heading">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <SectionHeading

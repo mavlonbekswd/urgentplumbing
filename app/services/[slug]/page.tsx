@@ -12,11 +12,11 @@ import { ContactCard } from "@/components/sections/ContactCard";
 import { CallButton } from "@/components/ui/CallButton";
 import { FaqList } from "@/components/ui/FaqList";
 import { Icon } from "@/components/ui/Icon";
-import { ImageSlot } from "@/components/ui/ImageSlot";
+import { WorkPhoto } from "@/components/ui/WorkPhoto";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import type { ImageSlotId } from "@/data/images";
+import { servicePhotos } from "@/data/photos";
 import { pageMetadata, serviceSchema } from "@/lib/seo";
 import { sentence } from "@/lib/cn";
 import { PhoneLink } from "@/components/ui/PhoneLink";
@@ -130,7 +130,9 @@ export default async function ServicePage({ params }: Props) {
             </ul>
           </div>
           <div className="space-y-6 self-start">
-            <ImageSlot id={`service-${service.slug}` as ImageSlotId} sizes="(min-width: 1024px) 560px, 100vw" />
+            {servicePhotos[service.slug] && (
+              <WorkPhoto id={servicePhotos[service.slug]!} sizes="(min-width: 1280px) 540px, (min-width: 1024px) 45vw, 100vw" />
+            )}
             {service.note ? (
               <aside aria-labelledby="note-heading" className="rounded-lg border border-navy-100 bg-water-50 p-6 sm:p-8">
                 <p className="flex items-center gap-2 text-[0.9375rem] font-semibold text-water-700">

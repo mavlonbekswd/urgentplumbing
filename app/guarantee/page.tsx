@@ -5,7 +5,8 @@ import { PageHero } from "@/components/sections/PageHero";
 import { AnchorButton } from "@/components/ui/Button";
 import { CallButton } from "@/components/ui/CallButton";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { hasImage, ImageSlot } from "@/components/ui/ImageSlot";
+import { WorkPhoto } from "@/components/ui/WorkPhoto";
+import { guaranteePhoto } from "@/data/photos";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
@@ -64,9 +65,12 @@ export default function GuaranteePage() {
           </>
         }
         aside={
-          hasImage("guarantee-finished-job") ? (
-            <ImageSlot id="guarantee-finished-job" className="hidden lg:block" sizes="(min-width: 1024px) 480px, 100vw" />
-          ) : undefined
+          <WorkPhoto
+            id={guaranteePhoto}
+            frameClassName="aspect-[4/3] lg:aspect-[4/5]"
+            className="hidden md:flex lg:mx-auto lg:max-w-sm"
+            sizes="(min-width: 1024px) 384px, 100vw"
+          />
         }
       />
 

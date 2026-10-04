@@ -25,6 +25,7 @@ export const serviceLinks: (NavLink & { description: string; icon: (typeof servi
 
 export const companyLinks: NavLink[] = [
   { href: "/about", label: "About us" },
+  { href: "/our-work", label: "Our work" },
   { href: "/guarantee", label: "Our guarantee" },
   { href: "/areas-we-cover", label: "Areas we cover" },
   { href: "/contact", label: "Contact" },
@@ -43,6 +44,7 @@ export const staticRoutes = [
   "/guarantee",
   "/areas-we-cover",
   "/about",
+  "/our-work",
   "/contact",
   "/privacy",
   "/terms",

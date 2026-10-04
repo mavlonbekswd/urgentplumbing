@@ -36,7 +36,7 @@ the site.
 | `data/locations.ts` | Towns covered, with their county and approximate coordinates, plus the direction groups (north, north-east, east, south, west) used on Areas We Cover |
 | `data/faqs.ts` | Home page and contact page FAQs |
 | `data/content.ts` | Shared "how we work" points, the how-it-works steps and emergency steps |
-| `data/images.ts` | Image slots (see below) |
+| `data/photos.ts` | Real job photos, their alt text and captions, and where each one appears (see below) |
 | `data/team.ts` | Team members — the About page shows a team section only once this has entries |
 | `data/navigation.ts` | Menu order, footer links, and the list of routes used by the sitemap |
 
@@ -66,17 +66,25 @@ Fields in `data/business.ts` marked `TODO: BUSINESS OWNER TO CONFIRM` stay hidde
 filled in. `tests/seo.spec.ts` fails the build if old unverified claims (e.g. "licensed",
 "same-day", star ratings) reappear in page text or structured data.
 
-## Images
+## Photos
 
-No stock or AI-generated photos are used. Each place a real photo can go is an **image slot** that
-renders nothing until a photo is supplied, so no placeholder art competes with the contact options.
+The site uses real photographs from Urgent Plumbing & Drainage jobs — no stock or AI-generated
+images. Web copies live in `public/images/work/` with descriptive names; the originals were left
+untouched. Everything about them is in `data/photos.ts`:
 
-1. Put the photo in `public/images/`
-2. Set its `src` in `data/images.ts` and write a specific `alt`
+- each photo's size, alt text, caption, category and focal point (so crops keep the subject in view)
+- where each one appears: the home page "Real plumbing work" section, one matched photo per service
+  page, About, Guarantee, and the full **Our Work** gallery (`/our-work`)
+- the photos deliberately **not** published, and why (e.g. boiler and unvented-cylinder work, which
+  imply Gas Safe / G3 qualifications the site doesn't claim)
 
-The photo then appears wherever that slot is used (each slot's comment says where). Rendered photos
-carry a `data-image-slot="…"` attribute. `data/images.ts` lists what each photo should show and the
-recommended size.
+Photos are served through `next/image` (AVIF/WebP at the right size for each screen), with a blur
+preview and a reserved frame so nothing shifts while they load. Only above-the-fold photos load
+eagerly. `tests/photos.spec.ts` fails if a file in `public/images/work/` isn't listed in
+`data/photos.ts` — anything in `public/` is reachable online, so held-back photos must stay out.
+
+To add a photo: copy it into `public/images/work/`, add an entry to `photos` in `data/photos.ts`
+(size, honest alt text and caption), then reference it in a placement or an Our Work group.
 
 ## Contact form
 
@@ -106,7 +114,7 @@ app/                     Routes (each folder is a URL)
 components/
   layout/                Header, DesktopNav (services dropdown), MobileNav, MobileCallBar, Footer, Logo
   sections/              Page sections: EnquiryForm, ContactCard, ServiceCard, LocationGrid, TownFinder, EmergencyBand…
-  ui/                    Primitives: Button, CallButton, WhatsAppButton, Section, SectionHeading, FaqList, ImageSlot, Icon…
+  ui/                    Primitives: Button, CallButton, WhatsAppButton, Section, SectionHeading, FaqList, WorkPhoto, Icon…
 data/                    All content and business details
 lib/seo.ts               Metadata and structured-data helpers
 tests/                   Playwright tests

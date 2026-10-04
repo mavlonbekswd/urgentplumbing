@@ -10,6 +10,7 @@ import { EnquiryForm } from "@/components/sections/EnquiryForm";
 import { GuaranteePreview } from "@/components/sections/GuaranteePreview";
 import { PointsGrid } from "@/components/sections/PointsGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
+import { RealWorkSection } from "@/components/sections/RealWorkSection";
 import { ServiceGrid } from "@/components/sections/ServiceCard";
 import { ButtonLink } from "@/components/ui/Button";
 import { CallButton } from "@/components/ui/CallButton";
@@ -117,6 +118,9 @@ export default function HomePage() {
         </div>
         <ServiceGrid services={services} className="mt-10" columns={4} helpCard />
       </Section>
+
+      {/* ───────────── Real work ───────────── */}
+      <RealWorkSection />
 
       {/* ───────────── Emergency ───────────── */}
       <EmergencyBand />
