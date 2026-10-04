@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+/*
+  Urgent Plumbing & Drainage — design tokens
+  ──────────────────────────────────────────
+  Colours are taken from the logo:
+    navy   #014373  the house outline
+    green  #038545  the "URGENT" wordmark   → used for every call-to-action
+    water  #00639C  the water drop          → links and secondary accents
+  Tailwind's default palette is switched off below so only these colours can be used.
+*/
+
+@theme {
+  --color-*: initial;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Navy — structure, headings, dark sections */
+  --color-navy-950: #061b30;
+  --color-navy-900: #0a2742;
+  --color-navy-800: #0d3456;
+  --color-navy-700: #014373; /* logo */
+  --color-navy-600: #1b5a8f;
+  --color-navy-300: #9fb9d3;
+  --color-navy-200: #c4d5e6;
+  --color-navy-100: #e2ebf4;
+
+  /* Green — calls to action only */
+  --color-green-800: #025a2e;
+  --color-green-700: #026b37;
+  --color-green-600: #038545; /* logo */
+  --color-green-300: #7fd0a3;
+  --color-green-100: #d9efe2;
+  --color-green-50: #eef8f2;
+
+  /* Water blue — links, small accents */
+  --color-water-700: #004f7d;
+  --color-water-600: #00639c; /* logo */
+  --color-water-100: #dcebf6;
+  --color-water-50: #eff6fb;
+
+  /* Neutrals */
+  --color-ink: #0f1d2b;
+  --color-body: #2b3946;
+  --color-muted: #4b5a69;
+  --color-line: #d8e0e8;
+  --color-line-strong: #b9c6d3;
+  --color-mist: #f3f6f8;
+  --color-cloud: #f8fafb;
+
+  /* WhatsApp's own brand green — used only on the WhatsApp logo so it's instantly recognisable */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #128c7e;
+
+  /* Status */
+  --color-warn-700: #8a4b00;
+  --color-warn-100: #fdf1dc;
+  --color-error-700: #b42318;
+  --color-error-50: #fef3f2;
+
+  /* Type */
+  --font-display: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Radius — deliberately squarer than a tech product */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+
+  /* Shadows — used sparingly */
+  --shadow-card: 0 1px 2px rgb(10 39 66 / 0.06);
+  --shadow-raised: 0 1px 2px rgb(10 39 66 / 0.06), 0 8px 24px -8px rgb(10 39 66 / 0.16);
+  --shadow-menu: 0 2px 4px rgb(10 39 66 / 0.06), 0 16px 40px -12px rgb(10 39 66 / 0.28);
+
+  --container-site: 75rem; /* 1200px */
+}
+
+/* ───────────────────────────── Base ───────────────────────────── */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-white);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem; /* 17px */
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-navy-900);
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background: var(--color-green-100);
+    color: var(--color-ink);
+  }
+
+  /* One visible focus style everywhere. */
+  :focus-visible {
+    outline: 3px solid var(--color-water-600);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-green-300);
+  }
+
+  summary {
+    cursor: pointer;
+  }
+
+  /* Duotone icons: navy outline (currentColor) with the logo's water blue as the soft fill. */
+  .icon-duo path[opacity] {
+    fill: var(--color-water-600);
+    opacity: 0.22;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Body scroll lock while the mobile menu is open. */
+  html.menu-open,
+  html.menu-open body {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ───────────────────────────── Utilities ───────────────────────────── */
+
+/* Fluid type scale */
+@utility text-h1 {
+  font-size: clamp(2.125rem, 1.55rem + 2.4vw, 3.375rem);
+  line-height: 1.08;
+}
+
+@utility text-h2 {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  line-height: 1.12;
+}
+
+@utility text-h3 {
+  font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.4375rem);
+  line-height: 1.25;
+}
+
+@utility text-lead {
+  font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  line-height: 1.55;
+}
+
+/* Running text links */
+@utility link {
+  color: var(--color-water-600);
+  font-weight: 600;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--color-water-600) 45%, transparent);
+  transition: text-decoration-color 150ms ease, color 150ms ease;
+
+  &:hover {
+    color: var(--color-water-700);
+    text-decoration-color: currentColor;
+  }
+}
+
+/* Body padding so the mobile action bar never covers the end of the page. */
+@utility pb-callbar {
+  padding-bottom: calc(4.75rem + env(safe-area-inset-bottom));
+
+  @media (width >= 48rem) {
+    padding-bottom: 0;
+  }
+}
+
+/* Long-form legal/prose content */
+@utility prose-site {
+  color: var(--color-body);
+  max-width: 44rem;
+
+  & > * + * {
+    margin-top: 1rem;
+  }
+
+  & h2 {
+    font-size: clamp(1.375rem, 1.25rem + 0.5vw, 1.625rem);
+    margin-top: 2.5rem;
+  }
+
+  & h3 {
+    font-size: 1.1875rem;
+    margin-top: 1.75rem;
+  }
+
+  & ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+
+  & li + li {
+    margin-top: 0.375rem;
+  }
+
+  & a {
+    color: var(--color-water-600);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  & strong {
+    color: var(--color-ink);
+  }
+}
+
+/* ───────────────────────────── Motion (restrained) ───────────────────────────── */
+
+@theme {
+  --animate-menu-in: menu-in 140ms ease-out;
+  --animate-drawer-in: drawer-in 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes drawer-in {
+    from {
+      transform: translateX(32px);
+    }
+  }
+}
